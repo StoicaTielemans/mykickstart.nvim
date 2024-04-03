@@ -26,5 +26,7 @@ return {
   {
     '/tpope/vim-fugitive',
     vim.keymap.set('n', '<leader>gs', ':Git<CR>', { desc = '[G]it Status' }),
+    vim.keymap.set('n', '<leader>ga', ':Git add .<CR>', { desc = '[G]it add' }),
+    vim.keymap.set('n', '<leader>gp', ':Git push<CR>', { desc = '[G]it push' }),
   },
 }
