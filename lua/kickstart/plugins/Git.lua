@@ -10,7 +10,7 @@ return {
         require('gitsigns').setup()
 
         -- preview hunk changes
-        vim.keymap.set('n', '<leader>gp', ':Gitsigns preview_hunk<CR>', { desc = '[G]it preview_hunk' })
+        vim.keymap.set('n', '<leader>gh', ':Gitsigns preview_hunk<CR>', { desc = '[G]it preview_hunk' })
       end,
       opts = {
         signs = {
