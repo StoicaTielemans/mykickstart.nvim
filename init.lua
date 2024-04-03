@@ -161,6 +161,9 @@ vim.opt.scrolloff = 10
 vim.api.nvim_set_keymap('n', '<leader>m', ':MarkdownPreviewToggle<CR>', { desc = 'start [M]arkdown preview' })
 -- save
 vim.keymap.set('n', '<C-s>', '<Cmd>w<CR>')
+--
+-- Neo Tree
+vim.keymap.set('n', '<leader>t', ':NvimTreeToggle<cr>')
 -- Set highlight on search, but clear on pressing <Esc> in normal modeini
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -244,24 +247,6 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
-  --    require('gitsigns').setup({ ... })
-  --
-  -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
-
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -290,6 +275,7 @@ require('lazy').setup({
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+        ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -856,9 +842,28 @@ require('lazy').setup({
       vim.fn['mkdp#util#install']()
     end,
   },
-
+  {
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
+    lazy = true,
+    requires = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require('nvim-tree').setup {
+        sort = { sorter = 'case_sensitive' },
+        view = {
+          width = 30,
+          adaptive_size = true,
+        },
+        renderer = { group_empty = true },
+        filters = { dotfiles = false },
+      }
+    end,
+  },
   -- require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
+  require 'kickstart.plugins.Git',
   -- require 'kickstart.plugins.lint',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
