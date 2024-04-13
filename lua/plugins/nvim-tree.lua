@@ -18,5 +18,4 @@ return {
   },
   -- Keybind to toggle nvim-tree
   -- vim.keymap.set('n', '-', ':NvimTreeToggle<cr>'),
-  vim.keymap.set('n', '-', ':NvimTreeFindFileToggle!<cr>'),
 }
